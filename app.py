@@ -1,7 +1,7 @@
 import streamlit as st
 import plotly.express as px
 import pandas as pd
-from get_data import get_data, get_players
+from get_data import get_data
 from last_game_report import last_game_report
 
 st.set_page_config(page_title="NBA Player Stats", layout="centered")
