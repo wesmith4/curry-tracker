@@ -1,7 +1,8 @@
+from soupsieve import select
 import streamlit as st
 
 
-def last_game_report(df):
+def last_game_report(df, selected_player_object):
 
     st.write("## Last Game Report")
 
@@ -21,10 +22,10 @@ def last_game_report(df):
     # st.write(second_to_last_game)
 
     st.write(
-        f"""On {readable_day}, Stephen Curry and the Golden State Warriors played {'at home against' if home_away == "Home" else "an away game at"} {opp}. The result was  a {last_game.iloc[0]['Result'].__str__().lower()}, where Golden State scored {last_game.iloc[0]['Winner_Score' if last_game.iloc[0]['Result'] == 'Win' else 'Loser_Score']} and {opp} scored {last_game.iloc[0]['Loser_Score' if last_game.iloc[0]['Result'] == 'Win' else 'Winner_Score']}."""
+        f"""On {readable_day}, {selected_player_object.get("name")} and {selected_player_object.get("team")} played {'at home against' if home_away == "Home" else "an away game at"} {opp}. The result was  a {last_game.iloc[0]['Result'].__str__().lower()}, where Golden State scored {last_game.iloc[0]['Winner_Score' if last_game.iloc[0]['Result'] == 'Win' else 'Loser_Score']} and {opp} scored {last_game.iloc[0]['Loser_Score' if last_game.iloc[0]['Result'] == 'Win' else 'Winner_Score']}."""
     )
 
-    st.write("### Curry's Stats:")
+    st.write(f"""### {selected_player_object.get("name")}'s Stats:""")
 
     col1, col2, col3, col4, col5, col6 = st.columns(6)
     col1.metric("Points", int(last_game.iloc[0]["PTS"]), int(last_game.iloc[0]["PTS"] - last_game_2.iloc[0]["PTS"]))

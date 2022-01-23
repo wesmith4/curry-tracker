@@ -6,8 +6,7 @@ import streamlit as st
 
 
 @st.cache
-def get_data():
-    GAME_LOG_URL = "https://www.espn.com/nba/player/gamelog/_/id/3975/stephen-curry"
+def get_data(url="https://www.espn.com/nba/player/gamelog/_/id/3975/stephen-curry"):
 
     month_names_lowercase = [
         "january",
@@ -25,7 +24,7 @@ def get_data():
     ]
 
     # Get the data from the game log
-    game_log = rq.get(GAME_LOG_URL).text
+    game_log = rq.get(url).text
 
     soup = BeautifulSoup(game_log, 'html.parser')
 
@@ -71,3 +70,8 @@ def get_data():
     master.reset_index(inplace=True, drop=True)
 
     return master
+
+
+@st.cache
+def get_players():
+    return pd.read_csv("./players.csv")
