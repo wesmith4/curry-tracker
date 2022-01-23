@@ -14,18 +14,32 @@ df[["REB", "AST", "BLK", "STL", "PF", "TO", "PTS"]] = df[["REB", "AST", "BLK", "
 fig = px.scatter(df, x="Date", y="PTS", color="Home/Away", title="Points by Date and Locatation")
 st.plotly_chart(fig)
 
-fig2 = px.box(df, x="Home/Away", y="3PT_Attempts", color="Result", title="3PT Attempts by Location and Result")
+sep_by_result = st.checkbox("Separate by Win/Loss", value=False)
+
+fig2 = px.box(
+    df,
+    x="Home/Away",
+    y="3PT_Attempts",
+    color="Result" if sep_by_result else None,
+    title="3PT Attempts by Location and Result",
+)
 st.plotly_chart(fig2)
 
-fig2a = px.box(df, x="Home/Away", y="3PT_Made", color="Result", title="3PT Made by Location and Result")
+fig2a = px.box(
+    df,
+    x="Home/Away",
+    y="3PT_Made",
+    color="Result" if sep_by_result else None,
+    title="3PT Made by Location and Result",
+)
 st.plotly_chart(fig2a)
 
 
 # Plot the rebounds
-fig3 = px.box(df, x="Result", y="REB", color="Home/Away", title="Rebounds by Location and Result")
+fig3 = px.box(
+    df, x="Home/Away", y="REB", color="Result" if sep_by_result else None, title="Rebounds by Location and Result"
+)
 st.plotly_chart(fig3)
-
-st.write(df)
 
 avg_points_by_opponent = df.groupby(["Home/Away", "OPP"]).mean()["PTS"].reset_index()
 
