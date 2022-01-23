@@ -70,8 +70,3 @@ def get_data(url="https://www.espn.com/nba/player/gamelog/_/id/3975/stephen-curr
     master.reset_index(inplace=True, drop=True)
 
     return master
-
-
-@st.cache
-def get_players():
-    return pd.read_csv("./players.csv")
