@@ -22,7 +22,7 @@ def last_game_report(df, selected_player_object):
     # st.write(second_to_last_game)
 
     st.write(
-        f"""On {readable_day}, {selected_player_object.get("name")} and {selected_player_object.get("team")} played {'at home against' if home_away == "Home" else "an away game at"} {opp}. The result was  a {last_game.iloc[0]['Result'].__str__().lower()}, where Golden State scored {last_game.iloc[0]['Winner_Score' if last_game.iloc[0]['Result'] == 'Win' else 'Loser_Score']} and {opp} scored {last_game.iloc[0]['Loser_Score' if last_game.iloc[0]['Result'] == 'Win' else 'Winner_Score']}."""
+        f"""On {readable_day}, {selected_player_object.get("name")} and {selected_player_object.get("team")} played {'at home against' if home_away == "Home" else "an away game at"} {opp}. The result was  a {last_game.iloc[0]['Result'].__str__().lower()}, where {selected_player_object.get("team") if last_game.iloc[0]['Result'] == "Win" else opp} scored {last_game.iloc[0]['Winner_Score']} and {opp if last_game.iloc[0]['Result'] == 'Win' else selected_player_object.get("team")} scored {last_game.iloc[0]["Loser_Score"]}."""
     )
 
     st.write(f"""### {selected_player_object.get("name")}'s Stats:""")
