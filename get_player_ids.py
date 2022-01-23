@@ -58,6 +58,7 @@ for team in teams:
 
 # Convert players to a dataframe
 players_df = pd.DataFrame(players)
+players_df['option_label'] = players_df.apply(lambda x: f"{x['name']} ({x['team']})", axis=1)
 
 # Export the dataframe to a csv
 players_df.to_csv("players.csv", index=False)

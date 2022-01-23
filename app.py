@@ -6,12 +6,13 @@ from last_game_report import last_game_report
 
 players = get_players()
 
+
 # In players, get the index of the row where "name" is "Stephen Curry"
 curry_index = players.index[players["name"] == "Stephen Curry"].tolist()[0]
 
-which_player = st.selectbox("Which player?", players["name"].tolist(), index=curry_index)
+which_player = st.selectbox("Which player?", players["option_label"], index=curry_index)
 
-selected_player_object = dict(players[players["name"] == which_player].iloc[0])
+selected_player_object = dict(players[players["name"] == which_player.split(" (")[0]].iloc[0])
 
 st.title(f"{selected_player_object.get('name')} by the numbers")
 
