@@ -2,8 +2,10 @@ import pandas as pd
 import requests as rq
 from bs4 import BeautifulSoup
 import re
+import streamlit as st
 
 
+@st.cache
 def get_data():
     GAME_LOG_URL = "https://www.espn.com/nba/player/gamelog/_/id/3975/stephen-curry"
 
@@ -50,9 +52,10 @@ def get_data():
         df["Date"] = df["Date"].apply(lambda x: x + "/2021" if len(x.split("/")[0]) == 2 else x + "/2022")
         df["Date"] = pd.to_datetime(df["Date"])
         df["Home/Away"] = df.OPP.apply(lambda x: "Home" if "vs" in x else "Away")
-        df["Win/Loss"] = df.Result.apply(lambda x: "WIN" if "W" in x else "LOSS")
+        df["Win/Loss"] = df.Result.apply(lambda x: "Win" if "W" in x else "Loss")
 
         df["3PT_Attempts"] = df["3PT"].apply(lambda x: int(x.split("-")[1]) if x != "-" else 0)
+        df["3PT_Made"] = df["3PT"].apply(lambda x: int(x.split("-")[0]) if x != "-" else 0)
 
         score_regex = r'\d+-\d+'
         df["Score"] = df.Result.apply(lambda x: re.findall(score_regex, x)[0])
