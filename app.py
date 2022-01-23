@@ -3,8 +3,6 @@ import plotly.express as px
 from sympy import preview
 from get_data import get_data
 from last_game_report import last_game_report
-import pandas as pd
-import numpy as np
 
 
 st.title("Stephen Curry by the numbers")
