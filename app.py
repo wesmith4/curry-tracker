@@ -3,6 +3,8 @@ import plotly.express as px
 from get_data import get_data, get_players
 from last_game_report import last_game_report
 
+st.set_page_config(page_title="NBA Player Stats", layout="centered")
+
 
 players = get_players()
 
