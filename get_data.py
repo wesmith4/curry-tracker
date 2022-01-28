@@ -5,7 +5,6 @@ import re
 import streamlit as st
 
 
-@st.cache
 def get_data(url="https://www.espn.com/nba/player/gamelog/_/id/3975/stephen-curry"):
 
     month_names_lowercase = [
